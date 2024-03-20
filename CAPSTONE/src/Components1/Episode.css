@@ -1,0 +1,68 @@
+
+/* Container styling */
+
+  
+  /* Title styling */
+  h1 {
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  /* Episode details container */
+  .details-container {
+    margin-top: 20px;
+  }
+  
+  /* Title styling */
+  .DataTitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Description styling */
+  .DataDes {
+    font-size: 16px;
+  }
+  
+  /* Image styling */
+  .DataImg {
+    max-width: 100%; /* Make the image responsive */
+    height: auto;
+    display: block; /* Center image horizontally */
+    margin: 10px auto; /* Add margin around the image */
+    max-height: 200px; /* Limit maximum height of the image */
+  }
+  
+  /* Loading text styling */
+  .load {
+    text-align: center; /* Center the loading text */
+    font-size: 16px;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 20px;
+    }
+  
+    .DataTitle {
+      font-size: 18px;
+    }
+  
+    .DataDes {
+      font-size: 14px;
+    }
+  
+    .DataImg {
+      max-height: 150px; /* Adjust maximum height for smaller screens */
+    }
+  }
+  
+.Back{
+
+width: 2cm ;
+height :1cm;
+
+}
+
+  
