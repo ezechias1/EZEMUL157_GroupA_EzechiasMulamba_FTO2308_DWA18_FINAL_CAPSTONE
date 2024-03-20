@@ -13,8 +13,9 @@ export default function Episode() {
       .then((shows) => setData(shows))
       .catch((error) => console.error("Error fetching data:", error));
   }, [id]);
-
+console.log([data])
   return (
+    
     <div>
 <button className="Back">Back</button>
 
@@ -23,11 +24,13 @@ export default function Episode() {
         <div className="details-container"> 
           <h2 className="DataTitle">Title: {data.title}</h2>
           <p className="DataDes">Description: {data.description}</p>
+          
           <img className="DataImg" src={data.image} alt={data.title} />
+
         </div>
       ) : (
         <p className="load">Loading...</p>
       )}
     </div>
   );
-}
+} 

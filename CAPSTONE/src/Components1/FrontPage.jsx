@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
-
+import Search from "./Search";
 export default function FrontPage() {
   const [data, setData] = useState([]);
 
@@ -65,12 +65,14 @@ export default function FrontPage() {
   return (
     <div>
       <NavBar
+      
         onButtonClick={() => {
           handleAscSort();
           forceUpdate();
         }}
       />
-
+      
+<Search/>
       <div className="info">
         {data.map((show) => (
           <Link to={`Episode/${show.id}`} key={show.id}>
@@ -93,3 +95,4 @@ export default function FrontPage() {
     </div>
   );
 }
+

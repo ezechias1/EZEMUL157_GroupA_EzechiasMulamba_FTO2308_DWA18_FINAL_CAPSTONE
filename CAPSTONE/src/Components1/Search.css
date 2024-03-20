@@ -1,0 +1,18 @@
+.Type{
+    
+border: none;
+background-color: transparent;
+height: 100%;
+}
+
+.text{
+background-color: white;
+width: 100%;
+border-radius: 10px;
+height: 2.5rem;
+padding: 0  15px;
+box-shadow: 0px 0px 8px #ddd;
+align-items: center;
+display: flex;
+
+}
