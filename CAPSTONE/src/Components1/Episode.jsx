@@ -8,7 +8,7 @@ export default function Episode() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`https://podcast-api.netlify.app/id/${id}`)
+    fetch(`https://podcast-api.netlify.app//id/${id}`)
       .then((res) => res.json())
       .then((shows) => setData(shows))
       .catch((error) => console.error("Error fetching data:", error));

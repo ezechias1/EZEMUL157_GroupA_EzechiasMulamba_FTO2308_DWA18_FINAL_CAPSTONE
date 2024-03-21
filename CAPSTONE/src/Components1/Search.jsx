@@ -3,7 +3,7 @@ import  { useState, useEffect } from "react";
 import "./Search.css";
 
 export default function Search() {
-  const [input, setInput] = useState("");
+  const [, setInput] = useState("");
   const [shows, setShows] = useState([]);
   const [filteredShows, setFilteredShows] = useState([]);
 
@@ -20,9 +20,11 @@ export default function Search() {
   const handleInputChange = (event) => {
     const searchTerm = event.target.value;
     setInput(searchTerm);
+    console.log(searchTerm)
+    console.log(shows)
 
     const filtered = shows.filter((show) =>
-      show.name.toLowerCase().includes(searchTerm.toLowerCase())
+      show.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredShows(filtered);
   };
@@ -32,7 +34,7 @@ export default function Search() {
       <input
         className="search-input"
         placeholder="Type to search..."
-        value={input}
+       
         onChange={handleInputChange}
       />
       <ul className="search-results">

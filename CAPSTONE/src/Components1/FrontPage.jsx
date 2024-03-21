@@ -72,7 +72,12 @@ export default function FrontPage() {
         }}
       />
       
-<Search/>
+<Search
+haneleSearch
+
+
+
+/>
       <div className="info">
         {data.map((show) => (
           <Link to={`Episode/${show.id}`} key={show.id}>
