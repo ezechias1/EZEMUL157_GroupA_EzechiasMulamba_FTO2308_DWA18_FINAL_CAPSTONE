@@ -21,7 +21,7 @@ export default function Search() {
     const searchTerm = event.target.value;
     setInput(searchTerm);
     console.log(searchTerm)
-    console.log(shows)
+   
 
     const filtered = shows.filter((show) =>
       show.title.toLowerCase().includes(searchTerm.toLowerCase())

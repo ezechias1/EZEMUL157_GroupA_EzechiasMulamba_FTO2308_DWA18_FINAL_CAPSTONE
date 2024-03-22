@@ -73,11 +73,11 @@ export default function FrontPage() {
       />
       
 <Search
-haneleSearch
-
-
-
-/>
+haneleSearch={() => {
+ Search();
+  forceUpdate()
+  console.log(Search)
+}}/>
       <div className="info">
         {data.map((show) => (
           <Link to={`Episode/${show.id}`} key={show.id}>
@@ -97,6 +97,10 @@ haneleSearch
           </Link>
         ))}
       </div>
+        (
+        <p className="load">Loading...</p>
+      )
+
     </div>
   );
 }
