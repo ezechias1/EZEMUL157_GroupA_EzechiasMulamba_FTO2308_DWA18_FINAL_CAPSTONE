@@ -25,14 +25,6 @@ export default function Episode() {
 
   useEffect(() => {
     console.log(data);
-    // if (Object.keys(data).length !== 0) {
-    //   data.seasons.forEach((season) => {
-    //     console.log(`Season ${season.title} Episodes:`);
-    //     season.episodes.forEach((episode) => {
-    //       console.log(episode);
-    //     });
-    //   });
-    // }
   }, [data]);
 
   const handleSeasonClickRoute = (episodes) => {
