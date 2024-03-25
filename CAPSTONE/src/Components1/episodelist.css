@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.card {
+  height: 350px;
+  width: 250px;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 200px;
+}
+
+.episode-number {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  font-size: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.featuring {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.368);
+}
+
+.audio-player {
+  max-width: 220px;
+}

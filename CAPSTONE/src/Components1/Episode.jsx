@@ -1,20 +1,20 @@
-
-import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./Episode.css";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function Episode() {
   const [data, setData] = useState({});
-  
+
   const [loading, setLoading] = useState(true); // State variable for loading status
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://podcast-api.netlify.app/id/${id}`)
       .then((res) => res.json())
       .then((episode) => {
         setData(episode);
-       
+
         setLoading(false); // Set loading to false once data is fetched
       })
       .catch((error) => {
@@ -24,7 +24,7 @@ export default function Episode() {
   }, [id]);
 
   useEffect(() => {
-    console.log(data)
+    console.log(data);
     // if (Object.keys(data).length !== 0) {
     //   data.seasons.forEach((season) => {
     //     console.log(`Season ${season.title} Episodes:`);
@@ -33,8 +33,13 @@ export default function Episode() {
     //     });
     //   });
     // }
-
   }, [data]);
+
+  const handleSeasonClickRoute = (episodes) => {
+    navigate("/episodeList", { state: episodes });
+
+    console.log("EPISODES", episodes);
+  };
 
   return (
     <div>
@@ -62,8 +67,7 @@ export default function Episode() {
                   <tr
                     key={season.id}
                     className="SeasonRow"
-                    onClick={() => console.log(`Clicked on Season ${season.episodes}`)}
-                    
+                    onClick={() => handleSeasonClickRoute(season.episodes)}
                   >
                     <td>{season.title}</td>
                     <td>{season.episodes.length}</td>
@@ -77,4 +81,3 @@ export default function Episode() {
     </div>
   );
 }
-

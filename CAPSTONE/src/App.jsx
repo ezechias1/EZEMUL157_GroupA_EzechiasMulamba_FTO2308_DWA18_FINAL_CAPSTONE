@@ -3,6 +3,7 @@ import "./App.css";
 // import LOGINPAGE from './Components1/LOGINPAGE';
 import FrontPage from "./Components1/FrontPage";
 import Episode from "./Components1/Episode";
+import EpisodeList from "./Components1/EpisodeList";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Routes>
             <Route path="/" element={<FrontPage />} />
             <Route path="/episode/:id" element={<Episode />} />
+            <Route path="episodeList" element={<EpisodeList />} />
           </Routes>
         </div>
       </Router>
