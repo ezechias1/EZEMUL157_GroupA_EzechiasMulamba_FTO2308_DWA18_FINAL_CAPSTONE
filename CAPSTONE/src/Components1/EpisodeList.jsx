@@ -20,6 +20,10 @@ const EpisodeList = () => {
 
   return (
     <>
+    
+     <button className="Back" onClick={() => window.history.back()} 
+     
+     >Back</button>
       <div className="container">
         {episodes.map((episode, idx) => (
           <div className="card" key={idx}>

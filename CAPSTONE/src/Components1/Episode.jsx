@@ -34,7 +34,10 @@ export default function Episode() {
   };
 
   return (
-    <div>
+     
+     <div>
+
+<div className="background" style={{backgroundImage:<img  src={data.image}/>}}></div>
       <button className="Back" onClick={() => window.history.back()}>
         Back
       </button>
@@ -46,7 +49,8 @@ export default function Episode() {
           <h2 className="DataTitle">Title: {data.title}</h2>
           <p className="DataDes">Description: {data.description}</p>
           <img className="DataImg" src={data.image} alt={data.title} />
-          {data.seasons.length && (
+          {data.seasons.length && ( 
+           
             <table className="SeasonsTable">
               <thead>
                 <tr>
