@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useCallback } from "react";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
@@ -19,6 +18,7 @@ const genreMap = {
 export default function FrontPage() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
 
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
@@ -29,9 +29,12 @@ export default function FrontPage() {
       .then((shows) => {
         setData(shows);
         setFilteredData(shows);
-        console.log(shows.id)
+        setLoading(false); // Set loading to false once data is fetched
       })
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false); // Set loading to false in case of error
+      });
   }, []);
 
   const formateDate = (date) => {
@@ -52,25 +55,18 @@ export default function FrontPage() {
   const handleAscSort = () => {
     // Sort Data Alphabetically by Title
     const sortedData = data.sort((a, b) => {
-      // Takes the current title (a) and checks it against the next title (b) to see if it's in order, if it is not, then it gets swapped (by index)
       if (a.title < b.title) {
         return -1;
       }
       if (a.title > b.title) {
         return 1;
       }
-
-      //Once the sort completed, we are given a list of indexes and it orders it as such
       return 0;
     });
     setData(sortedData);
-
-    console.log("click", sortedData);
-    return;
   };
 
   const handleInputChange = (searchTerm) => {
-    console.log("SEARCH TERM", searchTerm);
     if (!searchTerm) {
       setFilteredData(data);
     }
@@ -79,53 +75,48 @@ export default function FrontPage() {
       if (show.title?.toLowerCase().includes(searchTerm.toLowerCase())) {
         return show;
       }
-
       if (show.description?.toLowerCase().includes(searchTerm.toLowerCase())) {
         return show;
       }
     });
 
-    if (!filteredData) {
-      console.error("No data");
-    }
-
     setFilteredData(filteredData);
   };
 
   return (
-    
-    
     <div>
-    
       <NavBar
         onButtonClick={() => {
           handleAscSort();
           forceUpdate();
         }}
       />
-
       <Search handleInputChange={(e) => handleInputChange(e)} />
       <div className="info">
-        {filteredData &&
-          filteredData.map((show) => (
-            <Link to={`Episode/${show.id}`} key={show.id}>
-              <div key={show.id} className="episode">
-                <img src={show.image} alt={show.title} />
-                <div className="episode-details">
-                  <h3>{show.title}</h3>
-
-                  <p>Seasons: {show.seasons}</p>
-                  <p>Genres: {convertGenre(show.genres)}</p>
-                  <p>Last Updated:{formateDate(show.updated)}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        {filteredData.length === 0 && <div>No Results</div>}
-        
+        {loading ? ( // Display loading state if data is being fetched
+          <p className="load">Loading...</p>
+        ) : (
+          <>
+            {filteredData.length > 0 ? (
+              filteredData.map((show) => (
+                <Link to={`Episode/${show.id}`} key={show.id}>
+                  <div key={show.id} className="episode">
+                    <img src={show.image} alt={show.title} />
+                    <div className="episode-details">
+                      <h3>{show.title}</h3>
+                      <p>Seasons: {show.seasons}</p>
+                      <p>Genres: {convertGenre(show.genres)}</p>
+                      <p>Last Updated: {formateDate(show.updated)}</p>
+                    </div>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div>No Results</div>
+            )}
+          </>
+        )}
       </div>
-      
     </div>
   );
 }
-

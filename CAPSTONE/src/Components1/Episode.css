@@ -65,4 +65,29 @@ height :1cm;
 
 }
 
-  
+.details-container {
+  padding: 20px;
+}
+
+.SeasonsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.SeasonsTable th,
+.SeasonsTable td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.SeasonsTable th {
+  background-color: #f2f2f2;
+}
+
+.SeasonRow:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}

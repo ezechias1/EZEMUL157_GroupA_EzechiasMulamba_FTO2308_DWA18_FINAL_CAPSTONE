@@ -6,7 +6,7 @@ export default function NavBar({onButtonClick}) {
       <nav className="navbar">
         <div className="title">HereToHear</div>
         <button className="FilterButton" onClick={onButtonClick}>
-          Filter list
+          A to Z
        </button>
       </nav>
     </div>
