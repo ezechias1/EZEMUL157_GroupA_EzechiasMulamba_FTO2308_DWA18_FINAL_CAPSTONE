@@ -19,7 +19,7 @@ export default function FrontPage() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
-
+  const [sortByDateAsc, setSortByDateAsc] = useState(false); 
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
 
@@ -53,7 +53,7 @@ export default function FrontPage() {
   };
 
   const handleAscSort = () => {
-    // Sort Data Alphabetically by Title
+    // Sort Data Alphabetically by Title(A to Z )
     const sortedData = data.sort((a, b) => {
       if (a.title < b.title) {
         return -1;
@@ -64,6 +64,37 @@ export default function FrontPage() {
       return 0;
     });
     setData(sortedData);
+  };
+
+  
+  const handleAscSort1 = () => {
+    // Sort Data Alphabetically by Title (Z to A)
+    const sortedData = data.sort((a, b) => {
+      if (b.title < a.title) {
+        return -1;
+      }
+      if (b.title > a.title) {
+        return 0;
+      }
+      return 1;
+    });
+    setData(sortedData);
+  };
+
+  const handleDateAscSort = () => {
+    const sortedData = data.sort((a, b) => {
+      return new Date(a.updated) - new Date(b.updated);
+    });
+    setData(sortedData);
+    setSortByDateAsc(true);
+  };
+
+  const handleDateDescSort = () => {
+    const sortedData = data.sort((a, b) => {
+      return new Date(b.updated) - new Date(a.updated);
+    });
+    setData(sortedData);
+    setSortByDateAsc(false);
   };
 
   const handleInputChange = (searchTerm) => {
@@ -90,6 +121,20 @@ export default function FrontPage() {
           handleAscSort();
           forceUpdate();
         }}
+
+        onButtonClick1={() => {
+          handleAscSort1();
+          forceUpdate();
+        }}
+        onButtonClick2={() => {
+          if (sortByDateAsc) {
+            handleDateDescSort();
+          } else {
+            handleDateAscSort();
+          }
+          forceUpdate();
+        }}
+
       />
       <Search handleInputChange={(e) => handleInputChange(e)} />
       <div className="info">
@@ -120,3 +165,5 @@ export default function FrontPage() {
     </div>
   );
 }
+
+
