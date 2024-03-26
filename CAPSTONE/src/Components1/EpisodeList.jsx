@@ -20,7 +20,7 @@ const EpisodeList = () => {
 
   return (
     <>
-    
+     
      <button className="Back" onClick={() => window.history.back()} 
      
      >Back</button>

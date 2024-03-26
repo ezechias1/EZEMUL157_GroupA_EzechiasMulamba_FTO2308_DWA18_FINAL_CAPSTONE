@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
 import Search from "./Search";
 
+
 const genreMap = {
   1: "Personal Growth",
   2: "True Crime and Investigative Journalism",

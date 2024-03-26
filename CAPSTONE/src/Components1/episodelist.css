@@ -60,4 +60,10 @@
   max-width: 220px;
 }
 
-
+.description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 12; 
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}

@@ -1,5 +1,8 @@
 
-/* Container styling */
+
+
+
+
 
   
   /* Title styling */
@@ -98,4 +101,23 @@ height :1cm;
   
   }
 
- 
+  .episode-page {
+    position: fixed;
+    
+    top: 0;
+    left: 0;
+    width: 99% ;
+    height:  99%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1; 
+  }
+
+  .DataDes{
+color: darkgrey;
+
+
+  }
+  
+  
+  
