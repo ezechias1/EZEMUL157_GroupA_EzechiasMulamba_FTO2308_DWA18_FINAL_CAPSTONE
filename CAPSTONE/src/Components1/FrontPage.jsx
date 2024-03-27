@@ -202,15 +202,15 @@ export default function FrontPage() {
                       <p>Seasons: {show.seasons}</p>
                       <p>Genres: {convertGenre(show.genres)}</p>
                       <p>Last Updated: {formateDate(show.updated)}</p>
-                      Find out
+                      
                     </div>
-                    {/* <img
+                     {/* <img
                     className="favourite-image"
                     src={
                       FavIds.includes(show.Id) ? FavButtonSVG : FavButtonSVG
                     }
                     alt=""
-                  onClick={() =>markFavourite(show.id)}/> */}
+                  onClick={() =>markFavourite(show.id)}/>  */}
                   </div>
 
                 </Link>
