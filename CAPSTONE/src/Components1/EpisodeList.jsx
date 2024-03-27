@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./episodelist.css";
@@ -16,14 +17,27 @@ const EpisodeList = () => {
   const location = useLocation();
   const episodes = location.state;
 
-  useEffect(() => console.log(episodes));
+  useEffect(() => {
+    const handlePageClose = (event) => {
+      if (document.querySelector('episode.file').paused) return null; // If audio is paused, no prompt
+
+      const confirmationMessage = 'You have audio playing. Are you sure you want to leave?';
+      event.returnValue = confirmationMessage;
+      return confirmationMessage;
+    };
+
+    window.addEventListener('beforeunload', handlePageClose);
+
+    return () => {
+      window.removeEventListener('beforeunload', handlePageClose);
+    };
+  }, []);
 
   return (
     <>
-     
-     <button className="Back" onClick={() => window.history.back()} 
-     
-     >Back</button>
+      <button className="Back" onClick={() => window.history.back()}>
+        Back
+      </button>
       <div className="container">
         {episodes.map((episode, idx) => (
           <div className="card" key={idx}>
