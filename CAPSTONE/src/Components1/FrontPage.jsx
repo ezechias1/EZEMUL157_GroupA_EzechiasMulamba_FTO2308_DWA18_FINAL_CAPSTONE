@@ -6,6 +6,8 @@ import Search from "./Search";
 import { createClient } from "@supabase/supabase-js";
 import unfavouriteImage from "../assets/unFavButton.svg";
 import favouriteImage from "../assets/favImg.svg";
+//import ShowCarousel from "./ShowCarousel";
+
 const apiKey = process.env.SUPA_BASE_API_KEY;
 const ProApi = process.env.SUPA_BASE_PROJECT_URL;
 
@@ -32,7 +34,7 @@ export default function FrontPage() {
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [FavIds, setFavIds] = useState([]);
-  const [Favourites, setFavourites] = useState();
+  const [, setFavourites] = useState();
 
   useEffect(() => {
     fetch("https://podcast-api.netlify.app/shows")
@@ -237,6 +239,7 @@ export default function FrontPage() {
           </>
         )}
       </div>
+      {/* <ShowCarousel shows={data} /> */}
     </div>
   );
 }
