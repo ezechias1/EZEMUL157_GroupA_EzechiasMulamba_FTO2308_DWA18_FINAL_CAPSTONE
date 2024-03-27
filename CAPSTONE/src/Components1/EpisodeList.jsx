@@ -59,6 +59,7 @@ console.log(handlePageClose)
 
             <audio controls className="audio-player">
               <source src={episode.file} />
+              <button>add to favs</button>
             </audio>
           </div>
         ))}

@@ -3,13 +3,13 @@ import { useEffect, useState, useCallback } from "react";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
 import Search from "./Search";
-//import { createClient } from "@supabase/supabase-js";
-// import {.svg} from " ./src /assets /FavButton.svg"
+import { createClient } from "@supabase/supabase-js";
+import unfavouriteImage from "../assets/unFavButton.svg";
+import favouriteImage from "../assets/favImg.svg";
+const apiKey = process.env.SUPA_BASE_API_KEY;
+const ProApi = process.env.SUPA_BASE_PROJECT_URL;
 
-// const apiKey = process.env.SUPA_BASE_API_KEY;
-// const ProApi = process.env.SUPA_BASE_PROJECT_URL;
-
-// const supabase = createClient(ProApi, apiKey);
+const supabase = createClient(ProApi, apiKey);
 
 const genreMap = {
   1: "Personal Growth",
@@ -31,8 +31,8 @@ export default function FrontPage() {
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
 
-  // const [FavIds, setFavIds] = useState([]);
-  // const [Favourites, setFavourites] = useState();
+  const [FavIds, setFavIds] = useState([]);
+  const [Favourites, setFavourites] = useState();
 
   useEffect(() => {
     fetch("https://podcast-api.netlify.app/shows")
@@ -46,7 +46,7 @@ export default function FrontPage() {
         console.error("Error fetching data:", error);
         setLoading(false); // Set loading to false in case of error
       });
-    // getFavourites();
+    getFavourites();
   }, []);
 
   const formateDate = (date) => {
@@ -125,45 +125,59 @@ export default function FrontPage() {
     setFilteredData(filteredData);
   };
 
-  // const getFavourites = async () => {
-  //   const { data } = await supabase.from("favourites").select();
+  const getFavourites = async () => {
+    const { data } = await supabase.from("favourites").select();
 
-  //   setFavIds(data[0].favouriteids);
-  // };
+    setFavIds(data[0].favouriteids);
+    console.log(FavIds);
+  };
 
-  // const handleSetFavourites = () => {
-  //   const filteredFavourites = data.filter((show) => FavIds.includes(show.id));
-  //   setFavourites(filteredFavourites);
-  // };
+  const handleSetFavourites = () => {
+    const filteredFavourites = data.filter((show) => FavIds.includes(show.id));
+    setFavourites(filteredFavourites);
+  };
 
-  // useEffect(() => {
-  //   handleSetFavourites();
-  //   console.log(Favourites, FavIds);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, [FavIds]);
+  useEffect(() => {
+    handleSetFavourites();
 
-//   const markFavourite= (showId)=>{
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [FavIds]);
 
-// const isFavourited= FavIds.includes(showId);
-// const favouriteIdClone= JSON.parse(JSON.stringify(FavIds));
+  const updateFavourites = async (favIds) => {
+    const { error } = await supabase
+      .from("favourites")
+      .update({ favouriteids: favIds })
+      .eq("id", 1);
 
-// if(!isFavourited){
+    if (error) {
+      console.error("AWE ERROR BRU", error);
+      return;
+    }
+  };
 
-//   favouriteIdClone.push(showId);
+  const markFavourite = async (showId) => {
+    const isFavourited = FavIds.includes(showId);
+    const favouriteIdClone = [...FavIds];
 
-//   updateFavourites(favouriteIdClone);
-//   getFavourites();
-//   return;
+    if (!isFavourited) {
+      favouriteIdClone.push(showId);
+    } else {
+      const foundFavouriteIndex = favouriteIdClone.findIndex(
+        (id) => id === showId
+      );
+      if (foundFavouriteIndex !== -1) {
+        favouriteIdClone.splice(foundFavouriteIndex, 1);
+      }
+    }
 
-// }
-//If it is already in the list of favourites ids, remove it
-// const foundFavourite= favouriteIdClone.findIndex((id)=>id=== showId);
-// const newFavourites= favouriteIdClone.splice(foundFavourite,0);
+    //Update table with new clone
+    await updateFavourites(favouriteIdClone);
+    await getFavourites();
+  };
 
-//Update table with new clone
-// updateFavourites(newFavourites);
-// getFavourites()
-//   }
+  const handleSeasonClickRoute = (FrontPage) => {
+    navigate("/Fav", { state: FrontPage });
+  };
 
   return (
     <div>
@@ -184,6 +198,7 @@ export default function FrontPage() {
           }
           forceUpdate();
         }}
+        onButtonClick3={() => handleSeasonClickRoute(Fav)}
       />
       <Search handleInputChange={(e) => handleInputChange(e)} />
       <div className="info">
@@ -193,28 +208,28 @@ export default function FrontPage() {
           <>
             {filteredData.length > 0 ? (
               filteredData.map((show) => (
-                <Link to={`Episode/${show.id}`} key={show.id}>
-
-                  <div key={show.id} className="episode">
-                    <img src={show.image} alt={show.title}/>
-                    <div className="episode-details">
-                      <h3>{show.title}</h3>
-                      <p>Seasons: {show.seasons}</p>
-                      <p>Genres: {convertGenre(show.genres)}</p>
-                      <p>Last Updated: {formateDate(show.updated)}</p>
-                      
-                    </div>
-                     {/* <img
+                <div key={show.id} className="episode">
+                  <img src={show.image} alt={show.title} />
+                  <div className="episode-details">
+                    <h3>{show.title}</h3>
+                    <p>Seasons: {show.seasons}</p>
+                    <p>Genres: {convertGenre(show.genres)}</p>
+                    <p>Last Updated: {formateDate(show.updated)}</p>
+                    <Link to={`Episode/${show.id}`} key={show.id}>
+                      Listen
+                    </Link>
+                  </div>
+                  <img
                     className="favourite-image"
                     src={
-                      FavIds.includes(show.Id) ? FavButtonSVG : FavButtonSVG
+                      FavIds.includes(show.id)
+                        ? unfavouriteImage
+                        : favouriteImage
                     }
                     alt=""
-                  onClick={() =>markFavourite(show.id)}/>  */}
-                  </div>
-
-                </Link>
-                
+                    onClick={() => markFavourite(show.id)}
+                  />
+                </div>
               ))
             ) : (
               <div>No Results</div>
