@@ -178,7 +178,7 @@ export default function FrontPage() {
   };
 
   const handleFavouritePage = (favourites) => {
-    navigate("/Fav", { state: favourites });
+    navigate("./Fav", { state: favourites });
   };
 
   return (
