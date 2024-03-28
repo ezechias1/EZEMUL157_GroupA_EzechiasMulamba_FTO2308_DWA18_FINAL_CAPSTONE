@@ -83,6 +83,7 @@ export default function Fav() {
           forceUpdate();
         }}
       />
+      <button className="Back" onClick={() => window.history.back()}></button>
       <div className="favourite-page">FAVOURITES PAGE</div>
       <div className="info">
         {favourites ? (
