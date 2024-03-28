@@ -34,7 +34,7 @@ export default function FrontPage() {
   const forceUpdate = useCallback(() => updateState({}), []);
 
   const [FavIds, setFavIds] = useState([]);
-  const [, setFavourites] = useState();
+  const [favourites, setFavourites] = useState();
   const navigate = useNavigate();
   useEffect(() => {
     fetch("https://podcast-api.netlify.app/shows")
@@ -137,6 +137,7 @@ export default function FrontPage() {
   const handleSetFavourites = () => {
     const filteredFavourites = data.filter((show) => FavIds.includes(show.id));
     setFavourites(filteredFavourites);
+    console.log("HEHEHE", filteredFavourites);
   };
 
   useEffect(() => {
@@ -178,6 +179,7 @@ export default function FrontPage() {
   };
 
   const handleFavouritePage = (favourites) => {
+    console.log("FAV", favourites);
     navigate("/Fav", { state: favourites });
   };
 
@@ -201,7 +203,7 @@ export default function FrontPage() {
           forceUpdate();
         }}
         onButtonClick3={() => {
-          handleFavouritePage();
+          handleFavouritePage(favourites);
           forceUpdate();
         }}
       />

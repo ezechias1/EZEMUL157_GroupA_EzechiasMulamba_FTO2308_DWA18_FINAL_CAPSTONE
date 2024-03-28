@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./episodelist.css";
@@ -16,21 +15,22 @@ const getEpisodeTitle = (title, type) => {
 const EpisodeList = () => {
   const location = useLocation();
   const episodes = location.state;
+  console.log("elock", location.state);
 
   useEffect(() => {
     const handlePageClose = (event) => {
-      if (document.querySelector('audio').paused) return null; // If audio is paused, no prompt
-console.log(handlePageClose)
-      const confirmationMessage = 'You have audio playing. Are you sure you want to leave?';
+      if (document.querySelector("audio").paused) return null; // If audio is paused, no prompt
+      console.log(handlePageClose);
+      const confirmationMessage =
+        "You have audio playing. Are you sure you want to leave?";
       event.returnValue = confirmationMessage;
       return confirmationMessage;
-      
     };
 
-    window.addEventListener('beforeunload', handlePageClose);
+    window.addEventListener("beforeunload", handlePageClose);
 
     return () => {
-      window.removeEventListener('beforeunload', handlePageClose);
+      window.removeEventListener("beforeunload", handlePageClose);
     };
   }, []);
 

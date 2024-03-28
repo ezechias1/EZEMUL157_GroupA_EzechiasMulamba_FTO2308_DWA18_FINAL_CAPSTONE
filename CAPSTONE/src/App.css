@@ -3,6 +3,9 @@
   flex-wrap: wrap;
   gap: 20px;
   grid-template-columns: auto auto auto;
+  @media (max-width: 640px) {
+    grid-template-columns: auto;
+  }
 }
 
 .episode {
