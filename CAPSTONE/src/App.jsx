@@ -4,6 +4,7 @@ import "./App.css";
 import FrontPage from "./Components1/FrontPage";
 import Episode from "./Components1/Episode";
 import EpisodeList from "./Components1/EpisodeList";
+import Fav from "./Components1/Fav";
 // import History from "./Components1/History";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<FrontPage />} />
             <Route path="/episode/:id" element={<Episode />} />
             <Route path="episodeList" element={<EpisodeList />} />
+            <Route path="/Fav" element={<Fav />} />
             {/* <Route path="/History"  element={<History/>} /> */}
           </Routes>
         </div>
