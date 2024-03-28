@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { useEffect, useState, useCallback } from "react";
 import NavBar from "./NavBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Search from "./Search";
 import { createClient } from "@supabase/supabase-js";
 import unfavouriteImage from "../assets/unFavButton.svg";
@@ -35,7 +35,7 @@ export default function FrontPage() {
 
   const [FavIds, setFavIds] = useState([]);
   const [, setFavourites] = useState();
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetch("https://podcast-api.netlify.app/shows")
       .then((res) => res.json())
@@ -178,7 +178,7 @@ export default function FrontPage() {
   };
 
   const handleFavouritePage = (favourites) => {
-    navigate("./Fav", { state: favourites });
+    navigate("/Fav", { state: favourites });
   };
 
   return (

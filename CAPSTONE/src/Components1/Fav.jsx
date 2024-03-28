@@ -4,6 +4,7 @@ const Fav = () => {
   return (
     <div>
       <NavBar />
+      hello
     </div>
   );
 };
