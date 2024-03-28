@@ -177,8 +177,8 @@ export default function FrontPage() {
     await getFavourites();
   };
 
-  const handleSeasonClickRoute = (FrontPage) => {
-    navigate("/Fav", { state: FrontPage });
+  const handleFavouritePage = (favourites) => {
+    navigate("/Fav", { state: favourites });
   };
 
   return (
@@ -200,7 +200,10 @@ export default function FrontPage() {
           }
           forceUpdate();
         }}
-        onButtonClick3={() => handleSeasonClickRoute(Fav)}
+        onButtonClick3={() => {
+          handleFavouritePage();
+          forceUpdate();
+        }}
       />
       <Search handleInputChange={(e) => handleInputChange(e)} />
       <div className="info">

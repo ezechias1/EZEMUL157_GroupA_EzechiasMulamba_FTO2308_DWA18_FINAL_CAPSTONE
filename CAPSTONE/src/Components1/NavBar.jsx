@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-import { Link } from "react-router-dom";
+//mport { Link } from "react-router-dom";
 
 const NavBar = ({
   onButtonClick,
@@ -25,7 +25,6 @@ const NavBar = ({
             date filter
           </button>
           <br />
-
           <button className="FilterButton" onClick={onButtonClick3}>
             Favourites
           </button>
