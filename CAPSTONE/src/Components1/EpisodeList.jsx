@@ -19,12 +19,14 @@ const EpisodeList = () => {
 
   useEffect(() => {
     const handlePageClose = (event) => {
-      if (document.querySelector("audio").paused) return null; // If audio is paused, no prompt
-      console.log(handlePageClose);
-      const confirmationMessage =
-        "You have audio playing. Are you sure you want to leave?";
-      event.returnValue = confirmationMessage;
-      return confirmationMessage;
+      const audioElement = document.querySelector(".audio-player"); // Assuming .audio-player is the class of your audio element
+      if (audioElement && !audioElement.paused) {
+        const confirmationMessage =
+          "You have audio playing. Are you sure you want to leave?";
+        event.preventDefault(); // Stop the default behavior
+        event.returnValue = confirmationMessage;
+        return confirmationMessage;
+      }
     };
 
     window.addEventListener("beforeunload", handlePageClose);
